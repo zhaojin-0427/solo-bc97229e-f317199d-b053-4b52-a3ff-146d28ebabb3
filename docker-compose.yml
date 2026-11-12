@@ -1,0 +1,15 @@
+services:
+  split-api:
+    build: .
+    image: dataset-split-api:latest
+    container_name: dataset-split-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_PATH: /data/app.db
+    volumes:
+      - split_data:/data   # SQLite 数据库持久化，容器重启后数据不丢
+    restart: unless-stopped
+
+volumes:
+  split_data:
